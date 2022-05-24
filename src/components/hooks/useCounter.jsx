@@ -1,1 +1,3 @@
-const Prueba = ()=>{}
+const Prueba = ()=>{
+    //prueba desde VSC
+}
