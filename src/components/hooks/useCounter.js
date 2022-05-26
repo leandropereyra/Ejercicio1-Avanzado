@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useCounter = (initialCounter, initialStep, minValue, maxValue) => {
+const useCounter = (initialCounter, initialStep, minValue = Number.NEGATIVE_INFINITY, maxValue = Number.POSITIVE_INFINITY) => {
   const [count, setCount] = useState(initialCounter);
 
   //Step para agregar el valor de Incremento / Decremento
@@ -8,18 +8,15 @@ const useCounter = (initialCounter, initialStep, minValue, maxValue) => {
 
   // Aumentar el valor
   const increment = () => {
-    if (count + step <= minValue) {
-      setCount(count + step);
-    }
-    return;
+    if (count + step <= maxValue) {
+      setCount(count + step);}
   };
 
   //Decrementar valor
   const decrement = () => {
-    if (count - step >= maxValue) {
+    if (count - step >= minValue) {
       setCount(count - step);
     }
-    return;
   };
 
   //Restaurar valor inicial
