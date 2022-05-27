@@ -1,16 +1,11 @@
-import React, {useState } from "react";
+import React, {useEffect, useState } from "react";
 import useCounter from "../hooks/useCounter";
 
 const Counter = () => {
-  //Valores que se obtienen de los Inputs para ser usados como parámetros de useCounter
-  const [init, setInit] = useState(0);
-  const [step, setStep] = useState(1);
-  const [min, setMin] = useState(undefined);
-  const [max, setMax] = useState(undefined);
-
   // Parámetros iniciales solicitados por el useCounter
   // useCounter(Valor inicial del contador, Valor otorgado al Incremento / Decremento (Step), Valor mínimo a decrementar, Valor máximo a incrementar)
-  const contador = useCounter(init, step, min, max);
+  const contador = useCounter();
+
   
   //Funciones para Incremento, Decremento y Reset del Contador
   const increment = () => {
@@ -25,37 +20,37 @@ const Counter = () => {
 
   //Funciones para los eventos OnChange de los Inputs
   const initImput = (e) => {
-    setInit(parseInt(e.target.value));
+    contador.setInitValue(parseInt(e.target.value));
   };
 
   const stepImput = (e) => {
-    setStep(parseInt(e.target.value));
+    contador.setStep(parseInt(e.target.value));
   };
 
   const minImput = (e) => {
     if (e.target.value === "") {
-      setMin(undefined);
+      contador.setMin(undefined);
     } else {
-      setMin(parseInt(e.target.value));
+      contador.setMin(parseInt(e.target.value));
     }
   };
 
   const maxImput = (e) => {
     if (e.target.value === "") {
-      setMax(undefined);
+      contador.setMax(undefined);
     } else {
-      setMax(parseInt(e.target.value));
+      contador.setMax(parseInt(e.target.value));
     }
   };
 
   return (
     <div>
       <h1>Ejercicio 1: Contador</h1>
-      <p>Valor contador: {contador.count}</p>
+      <p>Valor contador: {contador.init}</p>
       <div className={"form-floating mb-3"}>
         <input
           type={"number"}
-          value={init}
+          value={contador.initValue}
           className={"form-control"}
           id={"init"}
           onChange={initImput}
@@ -67,7 +62,7 @@ const Counter = () => {
       <div className="form-floating mb-3">
         <input
           type={"number"}
-          value={step}
+          value={contador.step}
           className={"form-control"}
           id={"step"}
           onChange={stepImput}
@@ -79,7 +74,7 @@ const Counter = () => {
       <div className="form-floating mb-3">
         <input
           type={"number"}
-          value={min}
+          value={contador.min}
           className={"form-control"}
           id={"min"}
           onChange={minImput}
@@ -91,7 +86,7 @@ const Counter = () => {
       <div className="form-floating mb-3">
         <input
           type={"number"}
-          value={max}
+          value={contador.max}
           className={"form-control"}
           id={"max"}
           onChange={maxImput}

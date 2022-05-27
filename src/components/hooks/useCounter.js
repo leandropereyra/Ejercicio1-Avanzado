@@ -1,35 +1,47 @@
 import { useState } from "react";
 
-const useCounter = (initialCounter, initialStep, minValue = Number.NEGATIVE_INFINITY, maxValue = Number.POSITIVE_INFINITY) => {
-  const [count, setCount] = useState(initialCounter);
+const useCounter = () => {
+  const [initValue, setInitValue] = useState(0);
+  const [init, setInit] = useState(initValue);
 
   //Step para agregar el valor de Incremento / Decremento
-  const [step] = useState(initialStep);
+  const [step, setStep] = useState(undefined);  
+  const [min, setMin] = useState(undefined);
+  const [max, setMax] = useState(undefined);
 
   // Aumentar el valor
   const increment = () => {
-    if (count + step <= maxValue) {
-      setCount(count + step);}
+    if (init + step <= max) {
+      setInit(init + step);}
   };
 
   //Decrementar valor
   const decrement = () => {
-    if (count - step >= minValue) {
-      setCount(count - step);
+    if (init - step >= min) {
+      setInit(init - step);
     }
   };
 
   //Restaurar valor inicial
   const reset = () => {
-    setCount(0);
+    setInit(0);
   };
 
   //Variable y funciones que se retornan para que sean funciones del Hook
   return {
-    count,
+    initValue,
+    init,
+    step,
+    min,
+    max,
+    setInitValue,
     increment,
     decrement,
     reset,
+    setStep,
+    setInit,
+    setMin,
+    setMax
   };
 };
 
