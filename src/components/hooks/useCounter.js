@@ -24,7 +24,7 @@ const useCounter = (initialCounter, initialStep, minValue = Number.NEGATIVE_INFI
     setCount(0);
   };
 
-  //Variable y funciones que se dan para que se haga uso del Hook
+  //Variable y funciones que se retornan para que sean funciones del Hook
   return {
     count,
     increment,
