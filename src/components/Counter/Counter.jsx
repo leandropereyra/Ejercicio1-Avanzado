@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React, {useState } from "react";
 import useCounter from "../hooks/useCounter";
 
 const Counter = () => {
   //Valores que se obtienen de los Inputs para ser usados como parámetros de useCounter
   const [init, setInit] = useState(0);
   const [step, setStep] = useState(1);
-  const [min, setMin] = useState(-10);
-  const [max, setMax] = useState(10);
+  const [min, setMin] = useState(undefined);
+  const [max, setMax] = useState(undefined);
 
   // Parámetros iniciales solicitados por el useCounter
   // useCounter(Valor inicial del contador, Valor otorgado al Incremento / Decremento (Step), Valor mínimo a decrementar, Valor máximo a incrementar)
   const contador = useCounter(init, step, min, max);
-
+  
   //Funciones para Incremento, Decremento y Reset del Contador
   const increment = () => {
     contador.increment(contador.count);
