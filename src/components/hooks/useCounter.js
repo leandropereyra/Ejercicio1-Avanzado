@@ -3,16 +3,15 @@ import { useState } from "react";
 const useCounter = () => {
   const [initValue, setInitValue] = useState(0);
   const [init, setInit] = useState(initValue);
-
-  //Step para agregar el valor de Incremento / Decremento
-  const [step, setStep] = useState(undefined);  
+  const [step, setStep] = useState(undefined);
   const [min, setMin] = useState(undefined);
   const [max, setMax] = useState(undefined);
 
   // Aumentar el valor
   const increment = () => {
     if (init + step <= max) {
-      setInit(init + step);}
+      setInit(init + step);
+    }
   };
 
   //Decrementar valor
@@ -41,7 +40,7 @@ const useCounter = () => {
     setStep,
     setInit,
     setMin,
-    setMax
+    setMax,
   };
 };
 
