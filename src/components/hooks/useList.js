@@ -4,8 +4,8 @@ const useList = (initialValue = []) => {
   const [value, setValue] = useState(initialValue);
 
   // Push new value to list
-  const push = (element) => {
-    setValue((oldValue) => [...oldValue, element]);
+  const push = (task) => {
+    setValue((oldValue) => [...oldValue, { id: oldValue.length, task }]);
   };
 
   // Remove value from list
@@ -18,20 +18,26 @@ const useList = (initialValue = []) => {
     setValue([]);
   };
 
-  //Order list
+  //Alphabetical order
   const order = () => {
-    setValue([...value].sort());
+    setValue(
+      [...value].sort((first, second) => {
+        return first.task > second.task ? 1 : -1;
+      })
+    );
   };
 
-  //Reverse Order list
-  const reverseOrder = () => {
-    setValue([...value].reverse());
+  //Order by ID
+  const orderById = () => {
+    setValue(
+      [...value].sort((first, second) => {
+        return first.id > second.id ? 1 : -1;
+      })
+    );
   };
 
   // List is Empty ? true / false
   const isEmpty = () => value.length === 0;
-
-  // TODO:Develop more functions for lists
 
   return {
     value,
@@ -41,7 +47,7 @@ const useList = (initialValue = []) => {
     isEmpty,
     clear,
     order,
-    reverseOrder,
+    orderById,
   };
 };
 
