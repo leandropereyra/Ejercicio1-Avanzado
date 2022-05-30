@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import useList from "../../hooks/useList";
+import React, { useEffect, useState } from "react";
+import useList from "../hooks/useList";
 
 const Tasklist = () => {
   const tasks = useList([]);
@@ -15,34 +15,85 @@ const Tasklist = () => {
     setNewTask(event.target.value);
   };
 
+  useEffect(() => {
+    if (tasks.length > 0) tasks.order(newTask);
+    return;
+  }, [tasks, newTask]);
+
+  useEffect(() => {
+    if (tasks.length > 0) tasks.reverseOrder(newTask);
+    return;
+  }, [tasks, newTask]);
+
   return (
-    <div>
-      <h1>Task List</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          value={newTask}
-          onChange={handleInputChange}
-          placeholder="New Task"
-          type="text"
-        />
-        <button type="submit">Create Task</button>
-      </form>
-      {tasks.isEmpty() ? (
-        <p>Task List is Empty</p>
-      ) : (
-        <ul>
-          {tasks.value.map((task, index) => (
-            <li key={index}>
+    <div className={"card"}>
+      <div class="card-body">
+        <div>
+          <h1 style={{ color: "black" }} className={"m-2 mb-4"}>
+            Task List
+          </h1>
+        </div>
+        <div>
+          <form onSubmit={handleSubmit}>
+            <div className={"input-group mb-3"}>
               <input
-                type="checkbox"
-                onClick={() => tasks.remove(index)}
-                checked={false}
+                value={newTask}
+                onChange={handleInputChange}
+                placeholder="New Task"
+                type="text"
+                className={"form-control"}
               />
-              {task}
-            </li>
-          ))}
-        </ul>
-      )}
+              <button type="submit" className={"btn btn-outline-secondary"}>
+                Create Task
+              </button>
+            </div>
+          </form>
+        </div>
+        <div>
+          {tasks.isEmpty() ? (
+            <p style={{ color: "black" }}>Task List is Empty</p>
+          ) : (
+            <div>
+              <ul className={"list-group list-group-flush m-4"}>
+                {tasks.value.map((task, index) => (
+                  <li key={index} className={"list-group-item"}>
+                    <div className={"form-check"}>
+                      <input
+                        type="checkbox"
+                        onClick={() => tasks.remove(index)}
+                        defaultChecked={false}
+                        className={"form-check-input"}
+                        htmlFor={"task"}
+                      />
+                      <label className={"form-check-label"} htmlFor={"task"}>
+                        {task}
+                      </label>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <button
+                onClick={tasks.clear}
+                className={"btn btn-outline-secondary m-3"}
+              >
+                Clear List
+              </button>
+              <button
+                onClick={tasks.order}
+                className={"btn btn-outline-secondary m-3"}
+              >
+                Alphabetical order
+              </button>
+              <button
+                onClick={tasks.reverseOrder}
+                className={"btn btn-outline-secondary m-3"}
+              >
+                Reverse order
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

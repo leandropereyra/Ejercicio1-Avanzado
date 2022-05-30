@@ -13,6 +13,21 @@ const useList = (initialValue = []) => {
     setValue((oldValue) => oldValue.filter((_, i) => i !== index));
   };
 
+  //Clear list
+  const clear = () => {
+    setValue([]);
+  };
+
+  //Order list
+  const order = () => {
+    setValue([...value].sort());
+  };
+
+  //Reverse Order list
+  const reverseOrder = () => {
+    setValue([...value].reverse());
+  };
+
   // List is Empty ? true / false
   const isEmpty = () => value.length === 0;
 
@@ -24,6 +39,9 @@ const useList = (initialValue = []) => {
     push,
     remove,
     isEmpty,
+    clear,
+    order,
+    reverseOrder,
   };
 };
 

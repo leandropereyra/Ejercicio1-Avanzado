@@ -1,11 +1,13 @@
 import './App.css';
-import Counter from './components/Counter/Counter';
+import Tasklist from './components/lists/TaskList';
+// import Counter from './components/Counter/Counter';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Counter/>
+        {/* <Counter/> */}
+        <Tasklist/>
       </header>
     </div>
   );
